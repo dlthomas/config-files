@@ -1,0 +1,4 @@
+#!/bin/bash
+
+while true; do <.config/pianobar/ctl nc -w1 -u $1 $2; done
+

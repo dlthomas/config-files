@@ -1,0 +1,10 @@
+#!/bin/bash
+
+case "$1" in
+	songstart)
+		ratpoison -c "echo $(sed -n 's/\(artist\|title\)=//p')"
+		ratpoison -c "unlock"
+		;;
+	*) ;;
+esac
+

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+case "$1" in
+	next) echo n >.config/pianobar/ctl ;;
+	tired) echo t >.config/pianobar/ctl ;;
+	pause) echo p >.config/pianobar/ctl ;;
+	love) echo '+' >.config/pianobar/ctl ;;
+	ban) echo '-' >.config/pianobar/ctl ;;
+	trigger) echo >.config/pianobar/ctl ;;
+    cmd) ratpoison -c prompt >.config/pianobar/ctl ;;
+esac

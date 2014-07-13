@@ -1,0 +1,15 @@
+PS_EXTRA=
+
+export GIT_BRANCH=$(git branch 2>/dev/null| grep -P -o '(?<=^\* ).*')
+
+if [ "$GIT_BRANCH" ]; then
+	PS_EXTRA="$PS_EXTRA![33m$GIT_BRANCH[0m"
+fi
+
+if [ "$SESSIONHOME" -a -e $SESSIONHOME/prompt ]; then
+    source $SESSIONHOME/prompt
+fi
+
+if [ "$NOTIFY" ]; then
+    notify-send "$SESSION: $NOTIFY: ${PIPESTATUS[*]}"
+fi

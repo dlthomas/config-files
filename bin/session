@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export SESSION=$1
+
+screen -x $1
+
+if [ $? -ne 0 ]; then
+    echo "failed to restore screen $1; spawning new one..."
+    screen -S $1
+fi
+

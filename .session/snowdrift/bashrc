@@ -1,0 +1,9 @@
+
+cd working/snowdrift
+
+alias db_devel='sudo -u postgres psql <<<"drop database snowdrift_development; create database snowdrift_development;" && sudo -u postgres psql snowdrift_development <devDB.sql'
+alias db_prod='sudo -u postgres psql <<<"drop database snowdrift_production; create database snowdrift_production;" && sudo -u postgres psql snowdrift_production <production.sql'
+
+export PATH=~/.cabal/bin:$PATH
+export PATH=../.cabal-sandbox/bin:$PATH
+export PATH=./.cabal-sandbox/bin:$PATH

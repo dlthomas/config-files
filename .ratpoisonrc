@@ -1,0 +1,56 @@
+escape C-f
+
+bind c exec rxvt -fn 8x13 -fb 8x13bold -fg grey -bg black +sb
+
+newkmap music
+definekey music n exec piano next
+definekey music t exec piano tired
+definekey music plus exec piano love
+definekey music minus exec piano ban
+definekey music colon exec piano cmd
+
+definekey music space exec piano pause
+
+bind backslash readkey music
+
+bind h focusleft
+bind j focusdown
+bind k focusup
+bind l focusright
+
+bind C-h exchangeleft
+bind C-j exchangedown
+bind C-k exchangeup
+bind C-l exchangeright
+
+exec xmodmap -e 'keycode 23 = Tab'
+
+bind C-s exec ratpoison -c fdump >.ratpoison_saved
+bind C-d exec ratpoison -c "frestore $(cat .ratpoison_saved)"
+
+bind Tab exec xclip -o | xclip -i -selection CLIPBOARD
+bind S-Tab exec xclip -o -selection CLIPBOARD | xclip -i
+
+exec /usr/lib/notification-daemon/notification-daemon
+
+
+alias lock definekey top C-f readkey locked
+alias unlock definekey top C-f readkey root
+
+bind grave lock
+
+newkmap locked
+definekey locked f meta
+definekey locked a time
+definekey locked grave unlock
+definekey locked backslash readkey music
+
+newkmap controls
+definekey controls k exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- +5%
+definekey controls j exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -- -5%
+definekey controls Escape set topkmap top
+definekey controls question help controls
+definekey controls C-f set topkmap top
+
+bind A set topkmap controls
+
