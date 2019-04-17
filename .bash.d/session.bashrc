@@ -20,3 +20,14 @@ if [ "$SESSION" ]; then
     done
 fi
 
+function _session {
+    local basedir
+    case $COMP_CWORD in
+        1) basedir=~/.session ;;
+        *) basedir=~/.session/${COMP_WORDS[1]}/opt ;;
+    esac
+
+    COMPREPLY=( $(ls $basedir | grep "^${COMP_WORDS[$COMP_CWORD]}" ) )
+}
+
+complete -F _session session
