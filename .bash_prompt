@@ -3,11 +3,11 @@ PS_EXTRA=
 export GIT_BRANCH=$(git branch 2>/dev/null| grep -P -o '(?<=^\* ).*')
 
 if [ "$GIT_BRANCH" ]; then
-	PS_EXTRA="$PS_EXTRA!$(tput setaf 3)$GIT_BRANCH$(tput sgr0)"
+	PS_EXTRA="$PS_EXTRA!\[$(tput setaf 3)\]$GIT_BRANCH\[$(tput sgr0)\]"
 fi
 
 if sudo -nv 2>/dev/null; then
-	PS_EXTRA="$PS_EXTRA!$(tput setaf 1)sudo$(tput sgr0)"
+	PS_EXTRA="$PS_EXTRA!\[$(tput setaf 1)\]sudo\[$(tput sgr0)\]"
 fi
 
 if [ "$SESSIONHOME" -a -e $SESSIONHOME/prompt ]; then
@@ -17,3 +17,5 @@ fi
 if [ "$NOTIFY" ]; then
     notify-send "$SESSION: $NOTIFY: ${PIPESTATUS[*]}"
 fi
+
+PS1="${PIPESTATUS[*]}:$SESSION$PS_EXTRA:${debian_chroot:+($debian_chroot)}\[\033[32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
