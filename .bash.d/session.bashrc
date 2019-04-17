@@ -1,13 +1,14 @@
 
 if [ "$SESSION" ]; then
-    if [ ! -f ~/.session/$SESSION ]; then
-        mkdir -p ~/.session/$SESSION
+    SESSION_DIR=~/.session/$SESSION
+    if [ ! -f $SESSION_DIR ]; then
+        mkdir -p $SESSION_DIR
     fi
 
-    export PATH=~/.session/$SESSION/bin:$PATH
-    export HISTFILE=~/.session/$SESSION/bash_history
-    if [ -f ~/.session/$SESSION/bashrc ]; then
-        source ~/.session/$SESSION/bashrc
+    PATH=$SESSION_DIR/bin:$PATH
+    HISTFILE=$SESSION_DIR/bash_history
+    if [ -f $SESSION_DIR/bashrc ]; then
+        source $SESSION_DIR/bashrc
     fi
 fi
 
