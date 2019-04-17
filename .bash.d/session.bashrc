@@ -10,5 +10,13 @@ if [ "$SESSION" ]; then
     if [ -f $SESSION_DIR/bashrc ]; then
         source $SESSION_DIR/bashrc
     fi
+
+    for OPTION in ${SESSION_OPTIONS//-/ }; do
+        OPTION_DIR=$SESSION_DIR/opt/$OPTION
+        PATH=$OPTION_DIR/bin:$PATH
+        if [ -f $OPTION_DIR/bashrc ]; then
+            source $OPTION_DIR/bashrc
+        fi
+    done
 fi
 

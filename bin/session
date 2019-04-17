@@ -1,11 +1,21 @@
 #!/bin/bash
 
-export SESSION=$1
+SESSION=$1
+shift
+IFS=- eval 'SESSION_OPTIONS="$*"'
 
-screen -x $1
+if [ "$SESSION_OPTIONS" ]; then
+    SESSION_FULLNAME=$SESSION-$SESSION_OPTIONS
+else
+    SESSION_FULLNAME=$SESSION
+fi
+
+export SESSION SESSION_OPTIONS SESSION_FULLNAME
+
+screen -x $SESSION_FULLNAME
 
 if [ $? -ne 0 ]; then
-    echo "failed to restore screen $1; spawning new one..."
-    screen -S $1
+    echo "failed to restore screen $SESSION_FULLNAME; spawning new one..."
+    screen -S $SESSION_FULLNAME
 fi
 
