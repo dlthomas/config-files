@@ -5,7 +5,14 @@ PPS="${PIPESTATUS[*]}" # previous pipestatus
 export GIT_BRANCH=$(git branch 2>/dev/null| grep -P -o '(?<=^\* ).*')
 
 if [ "$GIT_BRANCH" ]; then
-    PS_EXTRA="$PS_EXTRA!\[$(tput setaf 3)\]$GIT_BRANCH\[$(tput sgr0)\]"
+    GIT_STASH_COUNT=$(git stash list | wc -l)
+    if [ 0 -eq "$GIT_STASH_COUNT" ]; then
+        STASH_REPORT=
+    else
+        STASH_REPORT="\[$(tput setaf 1)\]#$GIT_STASH_COUNT"
+    fi
+
+    PS_EXTRA="$PS_EXTRA!\[$(tput setaf 3)\]$GIT_BRANCH$STASH_REPORT\[$(tput sgr0)\]"
 fi
 
 if sudo -nv 2>/dev/null; then
