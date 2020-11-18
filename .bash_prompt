@@ -5,11 +5,11 @@ PPS="${PIPESTATUS[*]}" # previous pipestatus
 export GIT_BRANCH=$(git branch 2>/dev/null| grep -P -o '(?<=^\* ).*')
 
 if [ "$GIT_BRANCH" ]; then
-	PS_EXTRA="$PS_EXTRA!\[$(tput setaf 3)\]$GIT_BRANCH\[$(tput sgr0)\]"
+    PS_EXTRA="$PS_EXTRA!\[$(tput setaf 3)\]$GIT_BRANCH\[$(tput sgr0)\]"
 fi
 
 if sudo -nv 2>/dev/null; then
-	PS_EXTRA="$PS_EXTRA!\[$(tput setaf 1)\]sudo\[$(tput sgr0)\]"
+    PS_EXTRA="$PS_EXTRA!\[$(tput setaf 1)\]sudo\[$(tput sgr0)\]"
 fi
 
 if [ "$SESSIONHOME" -a -e $SESSIONHOME/prompt ]; then
